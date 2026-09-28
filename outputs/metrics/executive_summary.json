@@ -1,0 +1,152 @@
+{
+  "data": {
+    "rows": 350000,
+    "columns": 63,
+    "unique_customers": 350000,
+    "exact_duplicates": 0,
+    "duplicate_customers": 0,
+    "campaign_waves": 7,
+    "sentinel_9999_days_since_last_login": 4443,
+    "max_net_margin_reconciliation_error": 0.010000000000218279
+  },
+  "randomization": {
+    "global_sample_ratio_chi_square": 0.00028,
+    "global_sample_ratio_p_value": 0.9998600097995427,
+    "assignment_by_wave_chi_square": 0.0,
+    "assignment_by_wave_p_value": 1.0,
+    "max_absolute_numeric_smd": 0.012656644787453384,
+    "numeric_features_above_0_10_smd": 0,
+    "max_categorical_share_difference": 0.005108469259186232
+  },
+  "temporal_protocol": [
+    {
+      "role": "Development",
+      "waves": "2026-01, 2026-02, 2026-03, 2026-04, 2026-05",
+      "rows": 250000
+    },
+    {
+      "role": "Temporal validation",
+      "waves": "2026-06",
+      "rows": 50000
+    },
+    {
+      "role": "Final holdout",
+      "waves": "2026-07",
+      "rows": 50000
+    }
+  ],
+  "primary_estimand": "Intention-to-Treat",
+  "chosen_policy": "cashback_5",
+  "chosen_policy_label": "Cashback 5%",
+  "development_policy_rationale": "Choose the guardrail-eligible treatment with the highest incremental net profit in waves 1-5. The thresholds are explicit case assumptions and require Product and Risk approval before rollout.",
+  "holdout_chosen_policy": {
+    "conversion_effect_absolute": 0.07217855642887139,
+    "conversion_ci": [
+      0.06209962807038813,
+      0.08225748478735465
+    ],
+    "net_margin_effect_per_customer": 17.030578388432218,
+    "net_margin_ci": [
+      11.581054827012425,
+      22.480101949852013
+    ]
+  },
+  "all_waves_economics": {
+    "control": {
+      "conversion_rate": 0.27350024428082864,
+      "mean_net_margin": 80.19168150922695,
+      "incremental_net_profit_total_vs_control": 0.0,
+      "roi_incremental_net_profit_over_campaign_cost": null
+    },
+    "cashback_5": {
+      "conversion_rate": 0.3331990503047082,
+      "mean_net_margin": 92.64863648441316,
+      "incremental_net_profit_total_vs_control": 1453340.4799999995,
+      "roi_incremental_net_profit_over_campaign_cost": 1.2196607700330684
+    },
+    "cashback_10": {
+      "conversion_rate": 0.3787780082631877,
+      "mean_net_margin": 102.28423008348905,
+      "incremental_net_profit_total_vs_control": 2577360.9017705647,
+      "roi_incremental_net_profit_over_campaign_cost": 0.9871846072835738
+    }
+  },
+  "cuped_variance_reduction": {
+    "spend_30d_post": 0.1758992803952938,
+    "txn_count_30d_post": 0.18433512959169096,
+    "gross_margin_30d": 0.2451443430893695,
+    "net_margin_30d": 0.25885617080993795
+  },
+  "bootstrap_primary_kpi": [
+    {
+      "metric": "net_margin_30d",
+      "treatment": "cashback_5",
+      "reference": "control",
+      "estimate": 11.007916361672784,
+      "bootstrap_ci_low": 8.830132026220086,
+      "bootstrap_ci_high": 12.893030459938839,
+      "method": "Bayesian bootstrap, 300 draws"
+    },
+    {
+      "metric": "net_margin_30d",
+      "treatment": "cashback_10",
+      "reference": "control",
+      "estimate": 21.305904469526112,
+      "bootstrap_ci_low": 18.969186917381574,
+      "bootstrap_ci_high": 23.36134100663466,
+      "method": "Bayesian bootstrap, 300 draws"
+    },
+    {
+      "metric": "net_margin_30d",
+      "treatment": "cashback_10",
+      "reference": "cashback_5",
+      "estimate": 10.297988107853328,
+      "bootstrap_ci_low": 8.366376254868088,
+      "bootstrap_ci_high": 12.509857253486139,
+      "method": "Bayesian bootstrap, 300 draws"
+    }
+  ],
+  "power_and_mde": [
+    {
+      "treatment": "cashback_5",
+      "metric": "purchased_30d",
+      "n_treatment": 83335,
+      "n_control": 83335,
+      "baseline": 0.26579468410631785,
+      "mde_80pct_power": 0.0060629923876644115,
+      "observed_effect": 0.055690886182276356,
+      "observed_power_diagnostic": 1.0
+    },
+    {
+      "treatment": "cashback_5",
+      "metric": "net_margin_30d",
+      "n_treatment": 83335,
+      "n_control": 83335,
+      "baseline": 74.86988912221754,
+      "mde_80pct_power": 2.9109280770811883,
+      "observed_effect": 11.007916361672784,
+      "observed_power_diagnostic": 1.0
+    },
+    {
+      "treatment": "cashback_10",
+      "metric": "purchased_30d",
+      "n_treatment": 83330,
+      "n_control": 83335,
+      "baseline": 0.26579468410631785,
+      "mde_80pct_power": 0.0060630833355060365,
+      "observed_effect": 0.10200802800216652,
+      "observed_power_diagnostic": 1.0
+    },
+    {
+      "treatment": "cashback_10",
+      "metric": "net_margin_30d",
+      "n_treatment": 83330,
+      "n_control": 83335,
+      "baseline": 74.86988912221754,
+      "mde_80pct_power": 3.125224288905583,
+      "observed_effect": 21.305904469526112,
+      "observed_power_diagnostic": 1.0
+    }
+  ],
+  "mandatory_conclusion": "Maior conversão não implica maior valor econômico. A decisão deve ser baseada em lucro incremental líquido, incerteza estatística, guardrails e estabilidade do efeito."
+}

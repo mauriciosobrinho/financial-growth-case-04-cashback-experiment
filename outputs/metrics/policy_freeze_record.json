@@ -1,0 +1,27 @@
+{
+  "decision_stage": "frozen_before_wave_7_holdout",
+  "development_waves": [
+    "2026-01",
+    "2026-02",
+    "2026-03",
+    "2026-04",
+    "2026-05"
+  ],
+  "temporal_validation_wave": "2026-06",
+  "final_holdout_wave": "2026-07",
+  "primary_estimand": "Intention-to-Treat",
+  "primary_kpi": "net_margin_30d",
+  "chosen_policy": "cashback_5",
+  "guardrail_thresholds_absolute": {
+    "complaint_30d": 0.015,
+    "refund_flag_30d": 0.01,
+    "chargeback_flag_30d": 0.005,
+    "churn_60d": 0.005
+  },
+  "guardrail_pass_by_arm": {
+    "cashback_10": false,
+    "cashback_5": true
+  },
+  "rationale": "Choose the guardrail-eligible treatment with the highest incremental net profit in waves 1-5. The thresholds are explicit case assumptions and require Product and Risk approval before rollout.",
+  "configuration_sha256": "b6c9c6d93fb5d61c0636f7bdf5ab550c331577c819d708cf28f8ada345ab62c2"
+}
