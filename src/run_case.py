@@ -137,8 +137,13 @@ def read_data() -> pd.DataFrame:
     return df
 
 
-def data_quality(df: pd.DataFrame) -> dict:
-    expected_net = df["gross_margin_30d"] - df["cashback_cost"] - df["campaign_contact_cost"]
+def data_quality(df: pd.DataFrame, development: pd.DataFrame) -> dict:
+    """Audit the full assignment/pre-treatment data and only development outcomes."""
+    expected_net = (
+        development["gross_margin_30d"]
+        - development["cashback_cost"]
+        - development["campaign_contact_cost"]
+    )
     profile = {
         "rows": int(len(df)),
         "columns": int(df.shape[1]),
@@ -147,7 +152,10 @@ def data_quality(df: pd.DataFrame) -> dict:
         "duplicate_customers": int(df["customer_id"].duplicated().sum()),
         "campaign_waves": int(df["campaign_wave"].nunique()),
         "sentinel_9999_days_since_last_login": int((df["days_since_last_login_pre"] == 9999).sum()),
-        "max_net_margin_reconciliation_error": float((df["net_margin_30d"] - expected_net).abs().max()),
+        "outcome_integrity_scope": "development_waves_1_5_before_policy_freeze",
+        "max_net_margin_reconciliation_error": float(
+            (development["net_margin_30d"] - expected_net).abs().max()
+        ),
     }
     missing = (
         df.isna()
@@ -165,7 +173,7 @@ def data_quality(df: pd.DataFrame) -> dict:
     )
     missing_arm.to_csv(TABLES / "data_quality_missing_by_arm.csv", index=False)
     quantile_cols = ["spend_30d_pre", "spend_30d_post", "gross_margin_30d", "net_margin_30d"]
-    quantiles = df[quantile_cols].quantile([0, 0.01, 0.5, 0.95, 0.99, 0.999, 1]).T
+    quantiles = development[quantile_cols].quantile([0, 0.01, 0.5, 0.95, 0.99, 0.999, 1]).T
     quantiles.columns = [f"q_{str(q).replace('.', '_')}" for q in [0, 0.01, 0.5, 0.95, 0.99, 0.999, 1]]
     quantiles.reset_index().rename(columns={"index": "feature"}).to_csv(
         TABLES / "financial_outlier_quantiles.csv", index=False
@@ -785,10 +793,9 @@ def main() -> dict:
     ensure_directories()
     print("Comentário Técnico: carregando somente a base pública do experimento.")
     df = read_data()
-    profile = data_quality(df)
-    smd, _, randomization = randomization_checks(df)
-    compliance = compliance_table(df)
     development, validation, holdout, split = temporal_roles(df)
+    profile = data_quality(df, development)
+    smd, _, randomization = randomization_checks(df)
 
     print("Comentário Técnico: estimando ITT nas ondas 1–5 e preservando a onda 7.")
     development_summary = arm_summary(development, "development_waves_1_5")
@@ -818,6 +825,10 @@ def main() -> dict:
     )
     holdout_summary.to_csv(TABLES / "holdout_arm_summary.csv", index=False)
     holdout_contrasts.to_csv(METRICS / "holdout_itt_contrasts.csv", index=False)
+
+    # Full-period compliance and outcome summaries are allowed only after the
+    # policy record exists and the final holdout has been opened.
+    compliance = compliance_table(df)
 
     economics_all = pd.concat(
         [

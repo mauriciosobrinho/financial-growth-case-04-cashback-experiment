@@ -6,5 +6,6 @@
   "duplicate_customers": 0,
   "campaign_waves": 7,
   "sentinel_9999_days_since_last_login": 4443,
+  "outcome_integrity_scope": "development_waves_1_5_before_policy_freeze",
   "max_net_margin_reconciliation_error": 0.010000000000218279
 }
