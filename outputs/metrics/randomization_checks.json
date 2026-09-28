@@ -1,0 +1,9 @@
+{
+  "global_sample_ratio_chi_square": 0.00028,
+  "global_sample_ratio_p_value": 0.9998600097995427,
+  "assignment_by_wave_chi_square": 0.0,
+  "assignment_by_wave_p_value": 1.0,
+  "max_absolute_numeric_smd": 0.012656644787453384,
+  "numeric_features_above_0_10_smd": 0,
+  "max_categorical_share_difference": 0.005108469259186232
+}

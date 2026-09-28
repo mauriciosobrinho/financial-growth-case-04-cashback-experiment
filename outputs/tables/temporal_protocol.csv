@@ -1,0 +1,4 @@
+role,waves,rows
+Development,"2026-01, 2026-02, 2026-03, 2026-04, 2026-05",250000
+Temporal validation,2026-06,50000
+Final holdout,2026-07,50000

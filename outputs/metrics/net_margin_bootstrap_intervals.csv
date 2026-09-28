@@ -1,0 +1,4 @@
+metric,treatment,reference,estimate,bootstrap_ci_low,bootstrap_ci_high,method
+net_margin_30d,cashback_5,control,11.007916361672784,8.830132026220086,12.893030459938839,"Bayesian bootstrap, 300 draws"
+net_margin_30d,cashback_10,control,21.305904469526112,18.969186917381574,23.36134100663466,"Bayesian bootstrap, 300 draws"
+net_margin_30d,cashback_10,cashback_5,10.297988107853328,8.366376254868088,12.509857253486139,"Bayesian bootstrap, 300 draws"
