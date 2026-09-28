@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.artifact-validation/
+presentation/_build/
+work/
+data/processed/
+

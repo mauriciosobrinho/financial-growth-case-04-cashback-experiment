@@ -1,0 +1,64 @@
+column,group,dtype,description
+customer_id,Identificação e tempo,object,Identificador anonimizado e único do cliente no experimento.
+reference_date,Identificação e tempo,datetime64[ns],Data de referência imediatamente anterior à campanha.
+campaign_wave,Identificação e tempo,object,Onda mensal do experimento.
+customer_tenure_months,Identificação e tempo,int64,Tempo de relacionamento em meses.
+customer_segment,Segmentação,object,Segmento comercial/comportamental.
+region,Segmentação,object,Macrorregião do cliente.
+merchant_flag,Segmentação,int64,Indicador de perfil merchant.
+merchant_segment,Segmentação,object,Porte do merchant ou NotMerchant.
+income_band,Segmentação,object,Faixa de renda/proxy socioeconômico.
+relationship_tier,Segmentação,object,Tier de relacionamento.
+days_since_last_transaction,RFM pré-treatment,int64,Dias desde a última transação antes do tratamento.
+txn_count_30d_pre,RFM pré-treatment,int64,Quantidade de transações nos 30 dias pré-treatment.
+txn_count_90d_pre,RFM pré-treatment,int64,Quantidade de transações nos 90 dias pré-treatment.
+spend_30d_pre,RFM pré-treatment,float64,Valor transacionado nos 30 dias pré-treatment.
+spend_90d_pre,RFM pré-treatment,float64,Valor transacionado nos 90 dias pré-treatment.
+avg_ticket_30d_pre,RFM pré-treatment,float64,Ticket médio nos 30 dias pré-treatment.
+avg_ticket_90d_pre,RFM pré-treatment,float64,Ticket médio nos 90 dias pré-treatment.
+pix_count_30d_pre,Pix pré-treatment,int64,Quantidade de Pix nos 30 dias pré-treatment.
+pix_value_30d_pre,Pix pré-treatment,float64,Valor de Pix nos 30 dias pré-treatment.
+avg_balance_30d_pre,Conta pré-treatment,float64,Saldo médio pré-treatment; contém zeros legítimos.
+min_balance_30d_pre,Conta pré-treatment,float64,Saldo mínimo pré-treatment.
+max_balance_30d_pre,Conta pré-treatment,float64,Saldo máximo pré-treatment.
+card_spend_30d_pre,Cartão pré-treatment,float64,Gasto no cartão pré-treatment.
+card_utilization_pre,Cartão pré-treatment,float64,Utilização do limite antes da campanha.
+credit_limit,Cartão pré-treatment,float64,Limite de crédito conhecido antes da campanha.
+has_credit_card,Produtos,int64,Indicador de cartão ativo.
+has_loan,Produtos,int64,Indicador de empréstimo ativo.
+has_investment,Produtos,int64,Indicador de investimento ativo.
+has_insurance,Produtos,int64,Indicador de seguro ativo.
+has_pos,Produtos,int64,Indicador de POS ativo.
+num_products,Produtos,int64,Número de produtos ativos.
+app_sessions_30d_pre,Digital pré-treatment,float64,Sessões no app em 30 dias pré-treatment.
+app_sessions_90d_pre,Digital pré-treatment,float64,Sessões no app em 90 dias pré-treatment.
+days_since_last_login_pre,Digital pré-treatment,float64,Dias desde último login antes da campanha; contém sentinela 9999.
+push_open_rate_90d,Digital pré-treatment,float64,Taxa histórica de abertura de push; possui missing crescente.
+email_open_rate_90d,Digital pré-treatment,float64,Taxa histórica de abertura de e-mail; possui missing crescente.
+campaigns_received_90d,CRM pré-treatment,int64,Campanhas recebidas nos 90 dias anteriores.
+campaign_clicks_90d,CRM pré-treatment,int64,Cliques em campanhas anteriores.
+previous_offer_acceptance_rate,CRM pré-treatment,float64,Taxa histórica de aceitação de ofertas.
+support_contacts_90d,Fricção pré-treatment,float64,Contatos com suporte pré-treatment; possui missing.
+complaints_90d_pre,Fricção pré-treatment,float64,Reclamações pré-treatment.
+refunds_90d_pre,Fricção pré-treatment,int64,Quantidade de refunds pré-treatment.
+chargebacks_90d_pre,Fricção pré-treatment,int64,Quantidade de chargebacks pré-treatment.
+gross_margin_30d_pre,CUPED pré-treatment,float64,Margem bruta no período pré-treatment; covariável adequada para CUPED.
+treatment_arm,Assignment,object,"Braço randomizado: control, cashback_5 ou cashback_10."
+cashback_pct,Assignment,float64,Percentual nominal de cashback atribuído pelo braço.
+message_delivered,Pós-assignment / adesão,int64,Indicador pós-assignment de entrega da comunicação.
+offer_activated,Pós-assignment / adesão,int64,Indicador pós-assignment de ativação/adesão à oferta.
+purchased_30d,Outcomes,int64,Outcome binário de compra/conversão nos 30 dias pós-treatment.
+txn_count_30d_post,Outcomes,int64,Quantidade de transações nos 30 dias pós-treatment.
+spend_30d_post,Outcomes,float64,Valor transacionado nos 30 dias pós-treatment.
+gross_margin_30d,Outcomes,float64,Margem bruta pós-treatment antes dos custos da campanha.
+cashback_cost,Outcomes,float64,"Custo efetivamente incorrido com cashback, sujeito a elegibilidade e teto."
+campaign_contact_cost,Outcomes,float64,Custo de comunicação/operação da campanha.
+net_margin_30d,Outcomes,float64,Margem líquida pós-treatment após cashback e custo de contato.
+complaint_30d,Guardrails,int64,Guardrail: indicador de reclamação pós-treatment.
+refund_flag_30d,Guardrails,int64,Guardrail: indicador de refund pós-treatment.
+refund_value_30d,Guardrails,float64,Valor de refund pós-treatment.
+chargeback_flag_30d,Guardrails,int64,Guardrail: indicador de chargeback pós-treatment.
+chargeback_value_30d,Guardrails,float64,Valor de chargeback pós-treatment.
+churn_60d,Guardrails,int64,Guardrail: indicador de churn em 60 dias.
+post_campaign_app_sessions_7d,Pós-treatment - não usar como covariável,int64,Mediador pós-treatment; não deve ser usado como covariável para estimar efeito causal.
+cashback_balance_viewed_7d,Pós-treatment - não usar como covariável,int64,Comportamento pós-treatment; não deve ser usado como covariável causal pré-treatment.
